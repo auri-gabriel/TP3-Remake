@@ -11,15 +11,15 @@ import Submission.Category.Presentation.Talk;
 import Submission.List.ISubmissions;
 import Submission.Submission;
 import Submission.SubmissionStatus;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
 
-public class NewSubmissionGUI
-        extends JPanel {
+public class NewSubmissionGUI extends JPanel {
 
     private ISubmissions submissionsManager;
     private JTextField titleField;
@@ -32,30 +32,24 @@ public class NewSubmissionGUI
     private JTextField pagesField;
     private JButton addButton;
     private JComboBox<SubmissionStatus> submissionStatusComboBox;
-    private JList<Author> currentSelectedAuthorsList;
-    private JButton addAuthorsButton;
     private DefaultListModel<Author> currentSelectedListModel;
+    private JList<Author> authorsList;
+    private JButton addAuthorsButton;
 
     public NewSubmissionGUI(ISubmissions submissionsManager,
                             IPeople peopleManager,
                             SubmissionsGUI submissionsGUI) {
         this.submissionsManager = submissionsManager;
 
-        setLayout(new GridLayout(20,
-                                 2));
+        setLayout(new GridLayout(20, 2));
 
+        // Inicialização dos campos
         titleField = new JTextField();
-        submissionTypeComboBox = new JComboBox<>(
-                new String[]{"Article",
-                             "Summary",
-                             "Talk",
-                             "Minicourse",
-                             "Monography",
-                             "Technical Report"});
+        submissionTypeComboBox = new JComboBox<>(new String[]{
+                "Article", "Summary", "Talk", "Minicourse", "Monography", "Technical Report"
+        });
 
-        submissionStatusComboBox = new JComboBox<>(SubmissionStatus.
-                values());
-
+        submissionStatusComboBox = new JComboBox<>(SubmissionStatus.values());
         summaryField = new JTextField();
         abstractField = new JTextField();
         supervisorField = new JTextField();
@@ -63,116 +57,96 @@ public class NewSubmissionGUI
         yearField = new JTextField();
         pagesField = new JTextField();
 
-        // Create button to add a submission
+        // Lista de autores
+        currentSelectedListModel = new DefaultListModel<>();
+        authorsList = new JList<>(currentSelectedListModel);
+        addAuthorsButton = new JButton("Add Authors");
+        addAuthorsButton.addActionListener(e -> {
+            // Lógica para adicionar autores (personalize conforme necessário)
+            Author newAuthor = new Author("Example Author"); // Exemplo estático
+            currentSelectedListModel.addElement(newAuthor);
+        });
+
+        // Botão para adicionar submissão
         addButton = new JButton("Add Submission");
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String title = titleField.getText().
-                        trim();
-                String selectedType = submissionTypeComboBox.getSelectedItem().
-                        toString();
+                try {
+                    // Coleta de dados dos campos
+                    String title = titleField.getText().trim();
+                    String selectedType = (String) submissionTypeComboBox.getSelectedItem();
+                    String summary = summaryField.getText().trim();
+                    String submissionAbstract = abstractField.getText().trim();
+                    String supervisor = supervisorField.getText().trim();
+                    String course = courseField.getText().trim();
+                    int year = Integer.parseInt(yearField.getText().trim());
+                    int pages = Integer.parseInt(pagesField.getText().trim());
+                    List<String> keywords = new ArrayList<>(); // Customize conforme necessário
+                    List<Author> authors = new ArrayList<>();
 
-                // Get values from common fields
-                String summary = summaryField.getText().trim();
-                String submissionAbstract = abstractField.getText().trim();
+                    for (int i = 0; i < currentSelectedListModel.size(); i++) {
+                        authors.add(currentSelectedListModel.get(i));
+                    }
 
-                List<String> keywords = new ArrayList<>();
+                    // Criação de submissão
+                    Submission newSubmission = null;
+                    switch (selectedType) {
+                        case "Monography":
+                            newSubmission = new Monography(supervisor, course, year, pages, summary,
+                                    submissionAbstract, new ArrayList<>(), keywords, title,
+                                    SubmissionStatus.UNDER_EVALUATION, summary, authors);
+                            break;
 
-                // Handle different submission types
-                Submission newSubmission = null;
-                switch (selectedType) {
-                    case "Monography":
-                        newSubmission = new Monography(supervisor,
-                                                       course,
-                                                       year,
-                                                       pages,
-                                                       summary,
-                                                       submissionAbstract,
-                                                       institutions,
-                                                       keywords,
-                                                       title,
-                                                       SubmissionStatus.UNDER_EVALUATION,
-                                                       summary,
-                                                       authors);
-                        break;
+                        case "Article":
+                            newSubmission = new Article(summary, submissionAbstract, new ArrayList<>(),
+                                    keywords, title, SubmissionStatus.UNDER_EVALUATION, summary, authors);
+                            break;
 
-                    case "Article":
-                        newSubmission = new Article(summary,
-                                                    submissionAbstract,
-                                                    institutions,
-                                                    keywords,
-                                                    title,
-                                                    SubmissionStatus.UNDER_EVALUATION,
-                                                    summary,
-                                                    authors);
-                        break;
+                        case "Summary":
+                            newSubmission = new Summary(summary, submissionAbstract, new ArrayList<>(),
+                                    keywords, title, SubmissionStatus.UNDER_EVALUATION, summary, authors);
+                            break;
 
-                    case "Summary":
-                        newSubmission = new Summary(summary,
-                                                    submissionAbstract,
-                                                    institutions,
-                                                    keywords,
-                                                    title,
-                                                    SubmissionStatus.UNDER_EVALUATION,
-                                                    summary,
-                                                    authors);
-                        break;
+                        case "Technical Report":
+                            newSubmission = new TechnicalReport(year, pages, summary, submissionAbstract,
+                                    new ArrayList<>(), keywords, title, SubmissionStatus.UNDER_EVALUATION,
+                                    summary, authors);
+                            break;
 
-                    case "Technical Report":
-                        newSubmission = new TechnicalReport(year,
-                                                            pages,
-                                                            summary,
-                                                            submissionAbstract,
-                                                            institutions,
-                                                            keywords,
-                                                            title,
-                                                            SubmissionStatus.UNDER_EVALUATION,
-                                                            summary,
-                                                            authors);
-                        break;
+                        case "Minicourse":
+                            newSubmission = new Minicourse(course, title, summary, submissionAbstract,
+                                    new ArrayList<>(), title, SubmissionStatus.UNDER_EVALUATION,
+                                    summary, authors);
+                            break;
 
-                    case "Minicourse":
-                        newSubmission = new Minicourse(course,
-                                                       title,
-                                                       summary,
-                                                       submissionAbstract,
-                                                       ERROR,
-                                                       title,
-                                                       SubmissionStatus.UNDER_EVALUATION,
-                                                       summary,
-                                                       authors);
-                        break;
+                        case "Talk":
+                            newSubmission = new Talk(course, summary, submissionAbstract, new ArrayList<>(),
+                                    title, SubmissionStatus.UNDER_EVALUATION, summary, authors);
+                            break;
 
-                    case "Talk":
-                        newSubmission = new Talk(course,
-                                                 summary,
-                                                 submissionAbstract,
-                                                 ERROR,
-                                                 title,
-                                                 SubmissionStatus.UNDER_EVALUATION,
-                                                 summary,
-                                                 authors);
-                        break;
+                        default:
+                            JOptionPane.showMessageDialog(NewSubmissionGUI.this,
+                                    "Invalid submission type selected.");
+                            return;
+                    }
 
-                    default:
-                        //Add error handling, it should not be possible to create a submission other than the ones already dealt by the case
-                        break;
-                }
-
-                // Add submission to manager and update GUI
-                if (newSubmission != null && submissionsManager.include(
-                        newSubmission)) {
-                    submissionsGUI.addSubmissionToTable(newSubmission);
-                    clearFields();
-                } else {
+                    // Adiciona submissão e atualiza GUI
+                    if (submissionsManager.add(newSubmission)) {
+                        submissionsGUI.addSubmissionToTable(newSubmission);
+                        clearFields();
+                    } else {
+                        JOptionPane.showMessageDialog(NewSubmissionGUI.this,
+                                "Failed to add submission.");
+                    }
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(NewSubmissionGUI.this,
-                                                  "Failed to add submission.");
+                            "Error: " + ex.getMessage());
                 }
             }
         });
 
-        // Add components to the layout
+        // Adiciona os componentes ao layout
         add(new JLabel("Title:"));
         add(titleField);
         add(new JLabel("Submission Type:"));
@@ -205,6 +179,6 @@ public class NewSubmissionGUI
         courseField.setText("");
         yearField.setText("");
         pagesField.setText("");
+        currentSelectedListModel.clear();
     }
-
 }
