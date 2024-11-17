@@ -20,18 +20,18 @@ public class PresentationSubmission
     protected int duration;
 
     public PresentationSubmission(String summary,
-                                  String presentationAbstract,
-                                  int duration,
-                                  String title,
-                                  SubmissionStatus status,
-                                  int MAX_AUTHORS,
-                                  String category,
-                                  List<Author> authors) {
+            String presentationAbstract,
+            int duration,
+            String title,
+            SubmissionStatus status,
+            int MAX_AUTHORS,
+            String category,
+            List<Author> authors) {
         super(title,
-              status,
-              MAX_AUTHORS,
-              category,
-              authors);
+                status,
+                MAX_AUTHORS,
+                category,
+                authors);
         this.summary = summary;
         this.presentationAbstract = presentationAbstract;
         this.duration = duration;

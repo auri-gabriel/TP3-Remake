@@ -31,9 +31,9 @@ class InstitutionsGUI
         setLayout(new BorderLayout());
 
         // Create table with model
-        tableModel = new DefaultTableModel(new Object[]{"ID",
-                                                        "Name"},
-                                           0);
+        tableModel = new DefaultTableModel(new Object[] { "ID",
+                "Name" },
+                0);
         institutionsTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(institutionsTable);
 
@@ -45,8 +45,7 @@ class InstitutionsGUI
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String name = nameField.getText().
-                        trim();
+                String name = nameField.getText().trim();
 
                 if (!name.isEmpty()) {
                     if (!institutionsManager.exists(name)) {
@@ -55,35 +54,35 @@ class InstitutionsGUI
                             addInstitutionToTable(newInstitution);
                         } else {
                             JOptionPane.showMessageDialog(InstitutionsGUI.this,
-                                                          "Failed to add institution.");
+                                    "Failed to add institution.");
                         }
                     } else {
                         JOptionPane.showMessageDialog(InstitutionsGUI.this,
-                                                      "Institution with the same name already exists.");
+                                "Institution with the same name already exists.");
                     }
                 } else {
                     JOptionPane.showMessageDialog(InstitutionsGUI.this,
-                                                  "Please enter a valid name.");
+                            "Please enter a valid name.");
                 }
             }
         });
 
         // Add components to the layout
         JPanel formPanel = new JPanel(new GridLayout(3,
-                                                     2));
+                2));
         formPanel.add(new JLabel("Name:"));
         formPanel.add(nameField);
         formPanel.add(addButton);
 
         add(scrollPane,
-            BorderLayout.CENTER);
+                BorderLayout.CENTER);
         add(formPanel,
-            BorderLayout.NORTH);
+                BorderLayout.NORTH);
     }
 
     private void addInstitutionToTable(Institution institution) {
-        Object[] rowData = {institution.getId(),
-                            institution.getName()};
+        Object[] rowData = { institution.getId(),
+                institution.getName() };
         tableModel.addRow(rowData);
     }
 }

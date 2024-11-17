@@ -26,7 +26,7 @@ public interface ISubmissions {
      * @param title Title to be queried.
      *
      * @return Submission with the given title or null if no submission with the
-     * given title is found.
+     *         given title is found.
      */
     public Submission queryByTitle(String title);
 
@@ -45,8 +45,8 @@ public interface ISubmissions {
      * @param title Title of the submission to be deleted.
      *
      * @return True if the submission with the given title is deleted, or False
-     * if no submission with the
-     * given title is found.
+     *         if no submission with the
+     *         given title is found.
      */
     public boolean delete(String title);
 }

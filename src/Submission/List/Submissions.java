@@ -92,8 +92,8 @@ public class Submissions implements ISubmissions {
     public List<Submission> queryListByTitle(String title) {
         List<Submission> list = new ArrayList<>();
         for (Submission submission : Submissions) {
-            if ((title == null && submission.getTitle() == null) || (title != null && title.
-                    equals(submission.getTitle()))) {
+            if ((title == null && submission.getTitle() == null)
+                    || (title != null && title.equals(submission.getTitle()))) {
                 try {
                     list.add(submission);
                 } catch (Exception e) {
@@ -150,8 +150,8 @@ public class Submissions implements ISubmissions {
     public List<Submission> queryListByCategory(String category) {
         List<Submission> list = new ArrayList<>();
         for (Submission submission : Submissions) {
-            if ((category == null && submission.getCategory() == null) || (category != null && category.
-                    equals(submission.getCategory()))) {
+            if ((category == null && submission.getCategory() == null)
+                    || (category != null && category.equals(submission.getCategory()))) {
                 try {
                     list.add(submission);
                 } catch (Exception e) {
@@ -171,8 +171,8 @@ public class Submissions implements ISubmissions {
     @Override
     public Submission queryByTitle(String title) {
         for (Submission submission : Submissions) {
-            if ((title == null && submission.getTitle() == null) || (title != null && title.
-                    equals(submission.getTitle()))) {
+            if ((title == null && submission.getTitle() == null)
+                    || (title != null && title.equals(submission.getTitle()))) {
                 try {
                     return submission;
                 } catch (Exception e) {
@@ -194,8 +194,7 @@ public class Submissions implements ISubmissions {
         List<Submission> resultList = new ArrayList<>();
         for (Submission submission : Submissions) {
             for (Person author : submission.getAuthors()) {
-                if ((name == null && author.getName() == null) || (name != null && name.
-                        equals(author.getName()))) {
+                if ((name == null && author.getName() == null) || (name != null && name.equals(author.getName()))) {
                     resultList.add(submission);
                     break;
                 }
@@ -214,8 +213,8 @@ public class Submissions implements ISubmissions {
     @Override
     public boolean delete(String title) {
         for (Submission submission : Submissions) {
-            if ((title == null && submission.getTitle() == null) || (title != null && title.
-                    equals(submission.getTitle()))) {
+            if ((title == null && submission.getTitle() == null)
+                    || (title != null && title.equals(submission.getTitle()))) {
                 try {
                     Submissions.remove(submission);
                     return true;

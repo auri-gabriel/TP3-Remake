@@ -19,21 +19,21 @@ public class ScientificSubmission
     private int MAX_INSTITUTIONS;
 
     public ScientificSubmission(String summary,
-                                String submissionAbstract,
-                                List<Institution> institutions,
-                                List<String> keywords,
-                                String title,
-                                SubmissionStatus status,
-                                int MAX_AUTHORS,
-                                int MAX_KEYWORDS,
-                                int MAX_INSTITUTIONS,
-                                String category,
-                                List<Author> authors) {
+            String submissionAbstract,
+            List<Institution> institutions,
+            List<String> keywords,
+            String title,
+            SubmissionStatus status,
+            int MAX_AUTHORS,
+            int MAX_KEYWORDS,
+            int MAX_INSTITUTIONS,
+            String category,
+            List<Author> authors) {
         super(title,
-              status,
-              MAX_AUTHORS,
-              category,
-              authors);
+                status,
+                MAX_AUTHORS,
+                category,
+                authors);
         this.summary = summary;
         this.submissionAbstract = submissionAbstract;
 

@@ -22,26 +22,26 @@ public class TechnicalReport
     private int pages;
 
     public TechnicalReport(int year,
-                           int pages,
-                           String summary,
-                           String submissionAbstract,
-                           List<Institution> institutions,
-                           List<String> keywords,
-                           String title,
-                           SubmissionStatus status,
-                           String category,
-                           List<Author> authors) {
+            int pages,
+            String summary,
+            String submissionAbstract,
+            List<Institution> institutions,
+            List<String> keywords,
+            String title,
+            SubmissionStatus status,
+            String category,
+            List<Author> authors) {
         super(summary,
-              submissionAbstract,
-              institutions,
-              keywords,
-              title,
-              status,
-              4,
-              4,
-              1,
-              category,
-              authors);
+                submissionAbstract,
+                institutions,
+                keywords,
+                title,
+                status,
+                4,
+                4,
+                1,
+                category,
+                authors);
         this.year = year;
         this.pages = pages;
     }

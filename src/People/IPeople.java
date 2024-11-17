@@ -40,7 +40,6 @@ public interface IPeople {
      */
     public boolean exists(String name);
 
-
     /**
      * Returns a list of all authors.
      *

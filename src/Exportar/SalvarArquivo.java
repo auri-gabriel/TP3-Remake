@@ -17,13 +17,13 @@ public class SalvarArquivo {
 
     /**
      *
-     * @param pessoas ...
-     * @param submissoes ...
+     * @param pessoas      ...
+     * @param submissoes   ...
      * @param instituicoes ...
      */
     public SalvarArquivo(ArrayList<Person> pessoas,
-                         ArrayList<Submission> submissoes,
-                         ArrayList<Institution> instituicoes) {
+            ArrayList<Submission> submissoes,
+            ArrayList<Institution> instituicoes) {
         this.pessoas = pessoas;
         this.submissoes = submissoes;
         this.instituicoes = instituicoes;

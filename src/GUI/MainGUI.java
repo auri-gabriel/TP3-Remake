@@ -16,29 +16,29 @@ public class MainGUI {
                     JFrame frame = new JFrame("People Management System");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setSize(600,
-                                  400);
+                            400);
 
                     JTabbedPane tabbedPane = new JTabbedPane();
 
                     People people = new People();
                     tabbedPane.addTab("People",
-                                      new PersonsGUI(people));
+                            new PersonsGUI(people));
 
                     Institutions institutions = new Institutions();
                     tabbedPane.addTab("Institutions",
-                                      new InstitutionsGUI(institutions));
+                            new InstitutionsGUI(institutions));
 
                     Submissions submissions = new Submissions();
                     SubmissionsGUI submissionsGUI = new SubmissionsGUI(
                             submissions);
                     tabbedPane.addTab("Submissions",
-                                      submissionsGUI);
+                            submissionsGUI);
                     NewSubmissionGUI newSubmissionGUI = new NewSubmissionGUI(
                             submissions,
                             people,
                             submissionsGUI);
                     tabbedPane.addTab("New Submission",
-                                      newSubmissionGUI);
+                            newSubmissionGUI);
 
                     JMenuBar menuBar = new JMenuBar();
                     JMenu settingsMenu = new JMenu("Settings");
@@ -55,21 +55,18 @@ public class MainGUI {
                     menuBar.add(settingsMenu);
                     frame.setJMenuBar(menuBar);
 
-                    frame.getContentPane().
-                            add(tabbedPane);
+                    frame.getContentPane().add(tabbedPane);
                     frame.setVisible(true);
-                }
-        );
+                });
     }
 
     private static void showLookAndFeelDialog(JFrame parentFrame) {
         JDialog lookAndFeelDialog = new JDialog(parentFrame,
-                                                "Look and Feel Settings",
-                                                true);
+                "Look and Feel Settings",
+                true);
 
         // Create a JComboBox to hold available look and feel options
-        UIManager.LookAndFeelInfo[] lookAndFeelInfos = UIManager.
-                getInstalledLookAndFeels();
+        UIManager.LookAndFeelInfo[] lookAndFeelInfos = UIManager.getInstalledLookAndFeels();
         String[] lookAndFeelNames = new String[lookAndFeelInfos.length];
         for (int i = 0; i < lookAndFeelInfos.length; i++) {
             lookAndFeelNames[i] = lookAndFeelInfos[i].getName();
@@ -83,8 +80,7 @@ public class MainGUI {
             public void actionPerformed(ActionEvent e) {
                 try {
                     UIManager.setLookAndFeel(
-                            lookAndFeelInfos[lookAndFeelComboBox.
-                                    getSelectedIndex()].getClassName());
+                            lookAndFeelInfos[lookAndFeelComboBox.getSelectedIndex()].getClassName());
                     SwingUtilities.updateComponentTreeUI(parentFrame);
                     lookAndFeelDialog.dispose();
                 } catch (UnsupportedLookAndFeelException
@@ -97,23 +93,16 @@ public class MainGUI {
 
         // Create a layout for the dialog
         GroupLayout layout = new GroupLayout(lookAndFeelDialog.getContentPane());
-        lookAndFeelDialog.getContentPane().
-                setLayout(layout);
+        lookAndFeelDialog.getContentPane().setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
         // Arrange components in the layout
         layout.setHorizontalGroup(
-                layout.createParallelGroup().
-                        addComponent(lookAndFeelComboBox).
-                        addComponent(applyButton)
-        );
+                layout.createParallelGroup().addComponent(lookAndFeelComboBox).addComponent(applyButton));
 
         layout.setVerticalGroup(
-                layout.createSequentialGroup().
-                        addComponent(lookAndFeelComboBox).
-                        addComponent(applyButton)
-        );
+                layout.createSequentialGroup().addComponent(lookAndFeelComboBox).addComponent(applyButton));
 
         // Set dialog properties
         lookAndFeelDialog.pack();

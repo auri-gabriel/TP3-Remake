@@ -43,10 +43,10 @@ class PersonsGUI
         setLayout(new BorderLayout());
 
         // Create table with model
-        tableModel = new DefaultTableModel(new Object[]{"ID",
-                                                        "Name",
-                                                        "Role"},
-                                           0);
+        tableModel = new DefaultTableModel(new Object[] { "ID",
+                "Name",
+                "Role" },
+                0);
         personsTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(personsTable);
 
@@ -59,8 +59,7 @@ class PersonsGUI
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String name = nameField.getText().
-                        trim();
+                String name = nameField.getText().trim();
                 Role role = (Role) roleComboBox.getSelectedItem();
 
                 if (!name.isEmpty()) {
@@ -75,12 +74,12 @@ class PersonsGUI
                         addPersonToTable(newPerson);
                     } else {
                         JOptionPane.showMessageDialog(PersonsGUI.this,
-                                                      "Failed to add Person.");
+                                "Failed to add Person.");
                     }
 
                 } else {
                     JOptionPane.showMessageDialog(PersonsGUI.this,
-                                                  "Please enter a valid name.");
+                            "Please enter a valid name.");
                 }
             }
         });
@@ -88,9 +87,9 @@ class PersonsGUI
         // Add components to the layout
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel,
-                                          BoxLayout.X_AXIS));
+                BoxLayout.X_AXIS));
         JPanel fieldsPanel = new JPanel(new GridLayout(2,
-                                                       2));
+                2));
         fieldsPanel.add(new JLabel("Name:"));
         fieldsPanel.add(nameField);
         fieldsPanel.add(new JLabel("Role:"));
@@ -100,15 +99,15 @@ class PersonsGUI
         formPanel.add(addButton);
 
         add(scrollPane,
-            BorderLayout.CENTER);
+                BorderLayout.CENTER);
         add(formPanel,
-            BorderLayout.NORTH);
+                BorderLayout.NORTH);
     }
 
     private void addPersonToTable(Person person) {
-        Object[] rowData = {person.getId(),
-                            person.getName(),
-                            person.getRole()};
+        Object[] rowData = { person.getId(),
+                person.getName(),
+                person.getRole() };
         tableModel.addRow(rowData);
     }
 }

@@ -40,8 +40,8 @@ public class Institutions
     @Override
     public boolean exists(String name) {
         for (Institution institution : institutions) {
-            if ((name == null && institution.getName() == null) || (name != null && name.
-                    equals(institution.getName()))) {
+            if ((name == null && institution.getName() == null)
+                    || (name != null && name.equals(institution.getName()))) {
                 return true;
             }
         }
@@ -57,8 +57,7 @@ public class Institutions
      */
     public Institution getInstitution(String name) {
         for (Institution institution : institutions) {
-            if (institution.getName().
-                    equals(name)) {
+            if (institution.getName().equals(name)) {
                 return institution;
             }
         }

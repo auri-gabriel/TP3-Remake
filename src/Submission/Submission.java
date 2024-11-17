@@ -22,19 +22,18 @@ public class Submission
     /**
      * Submission Constructor
      *
-     * @param title The title of the submission
-     * @param status The status of the submission
+     * @param title       The title of the submission
+     * @param status      The status of the submission
      * @param MAX_AUTHORS The maximum number of authors
-     * @param category The category
-     * @param authors The authors list
+     * @param category    The category
+     * @param authors     The authors list
      */
     public Submission(
             String title,
             SubmissionStatus status,
             int MAX_AUTHORS,
             String category,
-            List<Author> authors
-    ) {
+            List<Author> authors) {
         this.title = title;
         this.status = status;
         this.MAX_AUTHORS = MAX_AUTHORS;
@@ -92,16 +91,11 @@ public class Submission
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Submission{");
-        sb.append("title=").
-                append(title);
-        sb.append(", status=").
-                append(status);
-        sb.append(", authors=").
-                append(authors);
-        sb.append(", MAX_AUTHORS=").
-                append(MAX_AUTHORS);
-        sb.append(", category=").
-                append(category);
+        sb.append("title=").append(title);
+        sb.append(", status=").append(status);
+        sb.append(", authors=").append(authors);
+        sb.append(", MAX_AUTHORS=").append(MAX_AUTHORS);
+        sb.append(", category=").append(category);
         sb.append('}');
         return sb.toString();
     }

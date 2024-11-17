@@ -16,24 +16,24 @@ public class Article
         extends ScientificSubmission {
 
     public Article(String summary,
-                   String submissionAbstract,
-                   List<Institution> institutions,
-                   List<String> keywords,
-                   String title,
-                   SubmissionStatus status,
-                   String category,
-                   List<Author> authors) {
+            String submissionAbstract,
+            List<Institution> institutions,
+            List<String> keywords,
+            String title,
+            SubmissionStatus status,
+            String category,
+            List<Author> authors) {
         super(summary,
-              submissionAbstract,
-              institutions,
-              keywords,
-              title,
-              status,
-              8,
-              4,
-              8,
-              category,
-              authors);
+                submissionAbstract,
+                institutions,
+                keywords,
+                title,
+                status,
+                8,
+                4,
+                8,
+                category,
+                authors);
     }
 
 }

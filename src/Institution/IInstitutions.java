@@ -32,8 +32,8 @@ public interface IInstitutions {
      * @param name Name of the institution to be deleted.
      *
      * @return True if the institution with the given name is deleted, or False
-     * if no institution with the
-     * given name is found.
+     *         if no institution with the
+     *         given name is found.
      */
     public boolean delete(String name);
 

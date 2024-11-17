@@ -38,15 +38,15 @@ public class NewSubmissionGUI extends JPanel {
     private JButton addAuthorsButton;
 
     public NewSubmissionGUI(ISubmissions submissionsManager,
-                            IPeople peopleManager,
-                            SubmissionsGUI submissionsGUI) {
+            IPeople peopleManager,
+            SubmissionsGUI submissionsGUI) {
         this.submissionsManager = submissionsManager;
 
         setLayout(new GridLayout(20, 3));
 
         // Inicialização dos campos
         titleField = new JTextField();
-        submissionTypeComboBox = new JComboBox<>(new String[]{
+        submissionTypeComboBox = new JComboBox<>(new String[] {
                 "Article", "Summary", "Talk", "Minicourse", "Monography", "Technical Report"
         });
 
@@ -80,7 +80,7 @@ public class NewSubmissionGUI extends JPanel {
                     String supervisor = supervisorField.getText().trim();
                     String course = courseField.getText().trim();
                     int year = Integer.parseInt(yearField.getText().trim());
-                    int pages = Integer.parseInt(pagesField.getText().trim());
+                    int pages = Integer.parseInt(pagesField.getValue().toString());
                     List<String> keywords = new ArrayList<>(); // Customize conforme necessário
                     List<Author> authors = new ArrayList<>();
 
@@ -114,14 +114,14 @@ public class NewSubmissionGUI extends JPanel {
                             break;
 
                         case "Minicourse":
-                            newSubmission = new Minicourse(course, title, summary, submissionAbstract,
-                                    new ArrayList<>(), title, SubmissionStatus.UNDER_EVALUATION,
-                                    summary, authors);
+                            newSubmission = new Minicourse(selectedType, supervisor, summary, submissionAbstract, pages,
+                                    title, SubmissionStatus.UNDER_EVALUATION, course, authors);
                             break;
 
                         case "Talk":
-                            newSubmission = new Talk(course, summary, submissionAbstract, new ArrayList<>(),
-                                    title, SubmissionStatus.UNDER_EVALUATION, summary, authors);
+                            newSubmission = new Talk(supervisor, summary, submissionAbstract, pages, title,
+                                    SubmissionStatus.UNDER_EVALUATION, course, authors);
+
                             break;
 
                         default:
@@ -177,10 +177,10 @@ public class NewSubmissionGUI extends JPanel {
         supervisorField.setText("");
         courseField.setText("");
         yearField.setText("");
-        pagesField.setText("");
+        pagesField.setValue(0);
         currentSelectedListModel.clear();
     }
-    
+
     private void openAddAuthorsDialog(IPeople peopleManager) {
         // Criação do diálogo
         JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Select Authors", true);

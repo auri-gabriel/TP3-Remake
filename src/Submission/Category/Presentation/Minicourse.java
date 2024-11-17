@@ -21,22 +21,22 @@ public class Minicourse
     private String methodology;
 
     public Minicourse(String resources,
-                      String methodology,
-                      String summary,
-                      String presentationAbstract,
-                      int duration,
-                      String title,
-                      SubmissionStatus status,
-                      String category,
-                      List<Author> authors) {
+            String methodology,
+            String summary,
+            String presentationAbstract,
+            int duration,
+            String title,
+            SubmissionStatus status,
+            String category,
+            List<Author> authors) {
         super(summary,
-              presentationAbstract,
-              duration,
-              title,
-              status,
-              3,
-              category,
-              authors);
+                presentationAbstract,
+                duration,
+                title,
+                status,
+                3,
+                category,
+                authors);
         this.resources = resources;
         this.methodology = methodology;
     }

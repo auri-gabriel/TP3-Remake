@@ -24,28 +24,28 @@ public class Monography
     private int pages;
 
     public Monography(String supervisor,
-                      String course,
-                      int year,
-                      int pages,
-                      String summary,
-                      String submissionAbstract,
-                      List<Institution> institutions,
-                      List<String> keywords,
-                      String title,
-                      SubmissionStatus status,
-                      String category,
-                      List<Author> authors) {
+            String course,
+            int year,
+            int pages,
+            String summary,
+            String submissionAbstract,
+            List<Institution> institutions,
+            List<String> keywords,
+            String title,
+            SubmissionStatus status,
+            String category,
+            List<Author> authors) {
         super(summary,
-              submissionAbstract,
-              institutions,
-              keywords,
-              title,
-              status,
-              1,
-              4,
-              1,
-              category,
-              authors);
+                submissionAbstract,
+                institutions,
+                keywords,
+                title,
+                status,
+                1,
+                4,
+                1,
+                category,
+                authors);
         this.supervisor = supervisor;
         this.course = course;
         this.year = year;

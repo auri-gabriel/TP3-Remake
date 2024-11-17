@@ -16,19 +16,19 @@ public class SubmissionsGUI
         setLayout(new BorderLayout());
 
         // Create table with model
-        tableModel = new DefaultTableModel(new Object[]{"Title",
-                                                        "Author"},
-                                           0);
+        tableModel = new DefaultTableModel(new Object[] { "Title",
+                "Author" },
+                0);
         submissionsTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(submissionsTable);
 
         add(scrollPane,
-            BorderLayout.CENTER);
+                BorderLayout.CENTER);
     }
 
     public void addSubmissionToTable(Submission submission) {
-        Object[] rowData = {submission.getTitle(),
-                            submission.getAuthors()};
+        Object[] rowData = { submission.getTitle(),
+                submission.getAuthors() };
         tableModel.addRow(rowData);
     }
 }
