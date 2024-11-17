@@ -2,6 +2,7 @@ package GUI;
 
 import People.Author;
 import People.IPeople;
+import People.Person;
 import Submission.Category.Cientific.Article;
 import Submission.Category.Cientific.Monography;
 import Submission.Category.Cientific.Summary;
@@ -29,7 +30,7 @@ public class NewSubmissionGUI extends JPanel {
     private JTextField supervisorField;
     private JTextField courseField;
     private JTextField yearField;
-    private JTextField pagesField;
+    private JSpinner pagesField;
     private JButton addButton;
     private JComboBox<SubmissionStatus> submissionStatusComboBox;
     private DefaultListModel<Author> currentSelectedListModel;
@@ -41,7 +42,7 @@ public class NewSubmissionGUI extends JPanel {
                             SubmissionsGUI submissionsGUI) {
         this.submissionsManager = submissionsManager;
 
-        setLayout(new GridLayout(20, 2));
+        setLayout(new GridLayout(20, 3));
 
         // Inicialização dos campos
         titleField = new JTextField();
@@ -55,16 +56,14 @@ public class NewSubmissionGUI extends JPanel {
         supervisorField = new JTextField();
         courseField = new JTextField();
         yearField = new JTextField();
-        pagesField = new JTextField();
+        pagesField = new JSpinner();
 
         // Lista de autores
         currentSelectedListModel = new DefaultListModel<>();
         authorsList = new JList<>(currentSelectedListModel);
         addAuthorsButton = new JButton("Add Authors");
         addAuthorsButton.addActionListener(e -> {
-            // Lógica para adicionar autores (personalize conforme necessário)
-            Author newAuthor = new Author("Example Author"); // Exemplo estático
-            currentSelectedListModel.addElement(newAuthor);
+            openAddAuthorsDialog(peopleManager);
         });
 
         // Botão para adicionar submissão
@@ -153,7 +152,6 @@ public class NewSubmissionGUI extends JPanel {
         add(submissionTypeComboBox);
         add(new JLabel("Authors:"));
         add(new JScrollPane(authorsList));
-        add(addAuthorsButton);
         add(new JLabel("Submission Status:"));
         add(submissionStatusComboBox);
         add(new JLabel("Summary:"));
@@ -168,6 +166,7 @@ public class NewSubmissionGUI extends JPanel {
         add(yearField);
         add(new JLabel("Pages:"));
         add(pagesField);
+        add(addAuthorsButton);
         add(addButton);
     }
 
@@ -181,4 +180,48 @@ public class NewSubmissionGUI extends JPanel {
         pagesField.setText("");
         currentSelectedListModel.clear();
     }
+    
+    private void openAddAuthorsDialog(IPeople peopleManager) {
+        // Criação do diálogo
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Select Authors", true);
+        dialog.setSize(400, 300);
+        dialog.setLayout(new BorderLayout());
+
+        // Lista de autores disponíveis
+        List<Person> availableAuthors = peopleManager.getAllAuthors();
+        DefaultListModel<Person> availableAuthorsModel = new DefaultListModel<>();
+        for (Person author : availableAuthors) {
+            availableAuthorsModel.addElement(author);
+        }
+        JList<Person> authorsList = new JList<>(availableAuthorsModel);
+        authorsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        // Painel de botões
+        JPanel buttonPanel = new JPanel();
+        JButton addButton = new JButton("Add Selected");
+        JButton cancelButton = new JButton("Cancel");
+
+        addButton.addActionListener(e -> {
+            // Adiciona os autores selecionados à lista atual
+            List<Person> selectedAuthors = authorsList.getSelectedValuesList();
+            for (Person author : selectedAuthors) {
+                currentSelectedListModel.addElement((Author) author); // Converte Person para Author
+            }
+            dialog.dispose();
+        });
+
+        cancelButton.addActionListener(e -> dialog.dispose());
+
+        buttonPanel.add(addButton);
+        buttonPanel.add(cancelButton);
+
+        // Adiciona componentes ao diálogo
+        dialog.add(new JScrollPane(authorsList), BorderLayout.CENTER);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Exibe o diálogo
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }
+
 }

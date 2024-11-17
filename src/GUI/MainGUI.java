@@ -21,7 +21,7 @@ public class MainGUI {
                     JTabbedPane tabbedPane = new JTabbedPane();
 
                     People people = new People();
-                    tabbedPane.addTab("Persons",
+                    tabbedPane.addTab("People",
                                       new PersonsGUI(people));
 
                     Institutions institutions = new Institutions();

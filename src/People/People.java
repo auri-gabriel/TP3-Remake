@@ -110,7 +110,9 @@ public class People
 
     @Override
     public List<Person> getAllAuthors() {
-        return this.people;
+        return this.people.stream()
+                .filter(person -> person instanceof Author)
+                .toList();
     }
 
 }
